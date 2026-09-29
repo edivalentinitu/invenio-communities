@@ -27,7 +27,11 @@
 {%- block html_body -%}
 <table style="font-family:'Lato',Helvetica,Arial,sans-serif;border-spacing:15px">
     <tr>
-        <td>{{ _("'{user_name}' commented on '{request_title}':").format(user_name=event_creator_name, request_title=request_title) }}</td>
+        {%- if event_creator_name -%}
+            {{ _("'{user_name}' commented on '{request_title}':").format(user_name=event_creator_name, request_title=request_title) }}
+        {%- else -%}
+            {{ _("A new comment was posted on '{request_title}':").format(request_title=request_title) }}
+        {%- endif -%}
     </tr>
     <tr>
         <td><em>{{ request_event_content }}</em></td>
